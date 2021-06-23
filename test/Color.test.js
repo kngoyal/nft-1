@@ -30,4 +30,24 @@ contract('Color', (accounts) => {
             assert.equal(symbol, 'COLOR')
         })
     })
+
+    describe('minting', async () => {
+        it('creates a new token', async () => {
+            const result = await contract.mint("#EC058E")
+            const totalSupply = await contract.totalSupply()
+            // Success
+            assert.equal(totalSupply, 1)
+            console.log(result)
+        })
+
+        it('should not create a duplicate token', async () => {
+            try {
+                await contract.mint("#EC058E")
+            } catch(e) {
+                const totalSupply = await contract.totalSupply()
+                assert.equal(totalSupply, 1)
+                console.log(`Got error : ${e}`)
+            }
+        })
+    })
 })
