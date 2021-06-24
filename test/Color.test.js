@@ -41,6 +41,10 @@ contract('Color', (accounts) => {
             assert.equal(event.tokenId.toNumber(), 1, 'id is correct')
             assert.equal(event.from, '0x0000000000000000000000000000000000000000', 'from is correct')
             assert.equal(event.to, accounts[0], 'to is correct')
+
+            // Failure
+            await contract.mint('#EC058E').should.be.rejected
+
         })
 
         it('should not create a duplicate token', async () => {
