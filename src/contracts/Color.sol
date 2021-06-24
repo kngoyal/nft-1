@@ -9,17 +9,9 @@ contract Color is ERC721Enumerable {
     constructor() ERC721("Color", "COLOR") {}
 
     function mint(string memory _color) public {
-        // Require unique color
         require(!_colorExists[_color]);
-
         colors.push(_color);
         _mint(msg.sender, colors.length);
         _colorExists[_color] = true;
-
-        // Color - add it
-
-        // Call the mint function
-
-        // Color - track it
     }
 }
