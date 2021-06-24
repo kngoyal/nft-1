@@ -57,4 +57,26 @@ contract('Color', (accounts) => {
             }
         })
     })
+
+    describe('indexing', async () => {
+        it('lists colors', async () => {
+            // Mint 3 more tokens
+            await contract.mint('#5386E4')
+            await contract.mint('#FFFFFF')
+            await contract.mint('#000000')
+
+            const totalSupply = await contract.totalSupply()
+
+            let color
+            let result = []
+
+            for (var i=0; i<totalSupply; i++) {
+                color = await contract.colors(i)
+                result.push(color)
+            }
+
+            let expected = ['#EC058E', '#5386E4', '#FFFFFF', '#000000']
+            assert.equal(result.join(','), expected.join(','))
+        })
+    })
 })
